@@ -1,0 +1,4 @@
+<app-interval></app-interval>
+<p>index works! time is {{time}}</p>
+<app-timer [time]="time"></app-timer>
+<input type="range" name="in" id="" min="0" max="60" [value]="time" (input)="update_time($event)">
