@@ -28,6 +28,5 @@ export class CircleComponent {
       const arc_length = this.radius * 2 * Math.PI
       this.dash_array = Math.round(arc_length)
     }
-    this.center = this.radius + this.stroke_width / 2
   }
 }
