@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CircleComponent } from './circle.component';
+import { ArcProgressComponent } from './arc-progress.component';
 
-describe('CircleComponent', () => {
-  let component: CircleComponent;
-  let fixture: ComponentFixture<CircleComponent>;
+describe('ArcProgressComponent', () => {
+  let component: ArcProgressComponent;
+  let fixture: ComponentFixture<ArcProgressComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CircleComponent]
+      imports: [ArcProgressComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(CircleComponent);
+    fixture = TestBed.createComponent(ArcProgressComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
