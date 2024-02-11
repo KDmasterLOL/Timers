@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange, SimpleChanges, afterRender } from '@angular/core';
 import { ArcProgressComponent } from '../arc-progress/arc-progress.component';
 
+const SECONDS_IN_MIN = 60
+
 @Component({
   selector: 'app-timer',
   standalone: true,
@@ -8,27 +10,46 @@ import { ArcProgressComponent } from '../arc-progress/arc-progress.component';
   templateUrl: './timer.component.html',
   styleUrl: './timer.component.scss'
 })
-export class TimerComponent implements OnChanges, OnDestroy, OnInit {
-  @Input() time: number = 30
-  remain_time: number = 0
+export class TimerComponent implements OnChanges, OnDestroy {
+  @Input('time') time: number = 30
+  remain_seconds: number = 0
   id_interval: NodeJS.Timeout | undefined
-  interval = 250
-  public get progress(): number { return this.remain_time / this.time }
+  interval = 50
+
+  public get progress(): number { return this.remain_seconds / SECONDS_IN_MIN / this.time }
+  public get content(): string {
+    const minutes = Math.floor(this.remain_seconds / SECONDS_IN_MIN)
+    const seconds = Math.floor(this.remain_seconds % SECONDS_IN_MIN)
+
+    return [minutes, seconds].map(
+      x => x.toLocaleString('en-US', {
+        minimumIntegerDigits: 2,
+        useGrouping: false
+      })).join(':')
+  }
 
   constructor(private cdr: ChangeDetectorRef) {
-    afterRender(() => {
-      if (this.id_interval == undefined)
-        this.id_interval = setInterval(() => { this.remain_time -= this.interval / 1000; this.cdr.detectChanges() }, this.interval)
-    })
+    afterRender(this.start)
   }
-  ngOnInit(): void {
-    this.remain_time = this.time
+  start() {
+    if (this.id_interval == undefined)
+      this.id_interval = setInterval(() => {
+        this.remain_seconds -= this.interval / 1000; this.cdr.detectChanges();
+        if (this.remain_seconds <= 0) this.stop()
+      }, this.interval)
   }
-  ngOnDestroy(): void {
+  stop() {
+    if (this.remain_seconds < 0) this.remain_seconds = 0
     if (this.id_interval) clearInterval(this.id_interval)
   }
 
+  ngOnDestroy(): void {
+    this.stop()
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
-    this.remain_time = this.time
+    this.remain_seconds = this.time * SECONDS_IN_MIN
+    this.start()
   }
 }
+

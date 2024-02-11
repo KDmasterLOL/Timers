@@ -10,7 +10,7 @@ import { IntervalComponent } from '../interval/interval.component';
   styleUrl: './index.component.scss'
 })
 export class IndexComponent {
-  time: number = 20
+  time: number = 0.1
   update_time(event: Event) {
     this.time = parseInt((event.target as HTMLInputElement).value)
   }

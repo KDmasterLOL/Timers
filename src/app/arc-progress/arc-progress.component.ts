@@ -19,5 +19,5 @@ export class ArcProgressComponent {
   protected get side_box_length(): number { return this.diameter + this.stroke_width }
   public get view_box(): string { return [0, 0, this.side_box_length, this.side_box_length].join(" ") }
 
-  public get dash_offset(): number { return this.dash_array * this.progress }
+  public get dash_offset(): number { return this.dash_array * (1 - this.progress) }
 }
