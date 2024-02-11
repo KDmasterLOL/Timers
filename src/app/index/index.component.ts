@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { TimerComponent } from '../timer/timer.component';
-import { IntervalComponent } from '../interval/interval.component';
 
 @Component({
   selector: 'app-index',
   standalone: true,
-  imports: [TimerComponent, IntervalComponent],
+  imports: [TimerComponent],
   templateUrl: './index.component.html',
   styleUrl: './index.component.scss'
 })
