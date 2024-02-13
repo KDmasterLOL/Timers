@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange, SimpleChanges, afterRender } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange, SimpleChanges, afterNextRender, afterRender } from '@angular/core';
 import { ArcProgressComponent } from '../arc-progress/arc-progress.component';
 
 const SECONDS_IN_MIN = 60
@@ -10,7 +10,7 @@ const SECONDS_IN_MIN = 60
   templateUrl: './timer.component.html',
   styleUrl: './timer.component.scss'
 })
-export class TimerComponent implements OnChanges, OnDestroy {
+export class TimerComponent implements OnChanges, OnDestroy, AfterViewInit {
   @Input('time') time: number = 30
   remain_seconds: number = 0
   id_interval: NodeJS.Timeout | undefined
@@ -28,19 +28,18 @@ export class TimerComponent implements OnChanges, OnDestroy {
       })).join(':')
   }
 
-  constructor(private cdr: ChangeDetectorRef) {
-    afterRender(this.start)
-  }
+  ngAfterViewInit(): void { this.start() }
+
   start() {
     if (this.id_interval == undefined)
       this.id_interval = setInterval(() => {
-        this.remain_seconds -= this.interval / 1000; this.cdr.detectChanges();
+        this.remain_seconds -= this.interval / 1000
         if (this.remain_seconds <= 0) this.stop()
       }, this.interval)
   }
   stop() {
     if (this.remain_seconds < 0) this.remain_seconds = 0
-    if (this.id_interval) clearInterval(this.id_interval)
+    if (this.id_interval) { clearInterval(this.id_interval); this.id_interval = undefined }
   }
 
   ngOnDestroy(): void {
@@ -49,7 +48,8 @@ export class TimerComponent implements OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.remain_seconds = this.time * SECONDS_IN_MIN
-    this.start()
+
+    if (typeof window !== 'undefined') this.start()
   }
 }
 
