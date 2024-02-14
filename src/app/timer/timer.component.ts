@@ -2,6 +2,16 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, OnDestro
 import { ArcProgressComponent } from '../arc-progress/arc-progress.component';
 
 const SECONDS_IN_MIN = 60
+const MINS_IN_HOUR = 60
+
+function parse_time(time: string) { // Time in format "hh:mm:ss" to seconds
+  const multipliers = [MINS_IN_HOUR, SECONDS_IN_MIN, 1]
+  return 10
+  return time.split(':')
+    .map(parseInt)
+    .map((v, i) => v * multipliers[i])
+    .reduce((x, y) => x + y, 0)
+}
 
 @Component({
   selector: 'app-timer',
@@ -11,7 +21,7 @@ const SECONDS_IN_MIN = 60
   styleUrl: './timer.component.scss'
 })
 export class TimerComponent implements OnChanges, OnDestroy, AfterViewInit {
-  @Input('time') time: number = 30
+  @Input({ transform: parse_time }) time: number = 10
   remain_seconds: number = 0
   id_interval: NodeJS.Timeout | undefined
   interval = 50
@@ -42,9 +52,7 @@ export class TimerComponent implements OnChanges, OnDestroy, AfterViewInit {
     if (this.id_interval) { clearInterval(this.id_interval); this.id_interval = undefined }
   }
 
-  ngOnDestroy(): void {
-    this.stop()
-  }
+  ngOnDestroy(): void { this.stop() }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.remain_seconds = this.time * SECONDS_IN_MIN
