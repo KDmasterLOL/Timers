@@ -5,10 +5,10 @@ const SECONDS_IN_MIN = 60
 const MINS_IN_HOUR = 60
 
 function parse_time(time: string) { // Time in format "hh:mm:ss" to seconds
-  const multipliers = [MINS_IN_HOUR, SECONDS_IN_MIN, 1]
-  return 10
+  const multipliers = [MINS_IN_HOUR * SECONDS_IN_MIN, SECONDS_IN_MIN, 1]
+
   return time.split(':')
-    .map(parseInt)
+    .map(v => parseInt(v))
     .map((v, i) => v * multipliers[i])
     .reduce((x, y) => x + y, 0)
 }
@@ -38,9 +38,10 @@ export class TimerComponent implements OnChanges, OnDestroy, AfterViewInit {
       })).join(':')
   }
 
-  ngAfterViewInit(): void { this.start() }
+  ngAfterViewInit(): void { if (typeof window !== 'undefined') this.start() }
 
   start() {
+    console.log("Timer started")
     if (this.id_interval == undefined)
       this.id_interval = setInterval(() => {
         this.remain_seconds -= this.interval / 1000
@@ -55,7 +56,7 @@ export class TimerComponent implements OnChanges, OnDestroy, AfterViewInit {
   ngOnDestroy(): void { this.stop() }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.remain_seconds = this.time * SECONDS_IN_MIN
+    this.remain_seconds = this.time
 
     if (typeof window !== 'undefined') this.start()
   }
