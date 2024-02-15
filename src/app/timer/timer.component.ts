@@ -26,7 +26,7 @@ export class TimerComponent implements OnChanges, OnDestroy, AfterViewInit {
   id_interval: NodeJS.Timeout | undefined
   interval = 50
 
-  public get progress(): number { return this.remain_seconds / SECONDS_IN_MIN / this.time }
+  public get progress(): number { return this.remain_seconds / this.time }
   public get content(): string {
     const minutes = Math.floor(this.remain_seconds / SECONDS_IN_MIN)
     const seconds = Math.floor(this.remain_seconds % SECONDS_IN_MIN)
