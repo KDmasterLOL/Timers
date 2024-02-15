@@ -1,2 +1,4 @@
-<app-timer [time]="time"></app-timer>
-<input type="time" name="t" id="some" value="00:00:00" (input)="update_time($event)" step="1">
+<div *ngFor="let i of timers | keyvalue">
+  <app-timer [time]="i.value"></app-timer>
+  <input type="time" name="t" id="some" [value]="i.value" (keydown.enter)="update_time($event, i.key)" step="1">
+</div>
