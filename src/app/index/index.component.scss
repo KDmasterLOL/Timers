@@ -1,0 +1,19 @@
+ul {
+  padding-left: 0;
+  display: grid;
+
+  li {
+    list-style-type: none;
+
+    figure {
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
+      align-items: center;
+
+      figcaption {
+        text-align: center;
+      }
+    }
+  }
+}
