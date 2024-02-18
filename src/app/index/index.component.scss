@@ -1,19 +1,43 @@
-ul {
-  padding-left: 0;
-  display: grid;
+@use "sass:math";
+@import '../../styles.scss';
 
-  li {
-    list-style-type: none;
+$proportion: 6;
 
-    figure {
-      display: flex;
-      flex-direction: column;
-      width: fit-content;
-      align-items: center;
+main {
+  height: 100vh - calc(100/$proportion);
 
-      figcaption {
-        text-align: center;
+  ul {
+    padding-left: 0;
+    display: grid;
+
+    li {
+      list-style-type: none;
+
+      figure {
+        @include flex-center();
+
+        width: fit-content;
+
+        figcaption {
+          text-align: center;
+        }
       }
+    }
+  }
+}
+
+footer {
+  height: calc(100vh / $proportion);
+  background-color: var(--second-back);
+
+  @include flex-center();
+
+  form {
+
+    width: fit-content;
+
+    @include flex-center(row) {
+      gap: 10px;
     }
   }
 }

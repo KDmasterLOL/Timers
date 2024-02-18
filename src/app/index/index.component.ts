@@ -12,7 +12,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class IndexComponent {
   timers: { [key: string]: string }
-    = { 'one timer': '00:00:00', 'second timer': '00:00:00' }
+    = { 'default timer': '00:00:00' }
   constructor(private formBuilder: FormBuilder) { }
   checkoutForm = this.formBuilder.group({
     name: '',

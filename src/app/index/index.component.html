@@ -1,16 +1,20 @@
-<ul>
-  <li *ngFor="let i of timers | keyvalue">
-    <figure>
-      <figcaption>{{i.key}}</figcaption>
-      <app-timer [time]="i.value"></app-timer>
-      <input type="time" name="t" id="some" [value]="i.value" (blur)="update_time($event, i.key)"
-        (keydown.enter)="update_time($event, i.key)" step="1">
-    </figure>
-  </li>
-</ul>
-<form [formGroup]="checkoutForm" (ngSubmit)="create_timer()">
-  <input type="text" value="default" name="new-timer-name" id="timer-name" formControlName="name">
-  <input type="time" name="t" id="some" value="00:00:00" step="1" formControlName="time">
-  <!-- TODO: Fix default value for time -->
-  <button type="submit">Create timer</button>
-</form>
+<main>
+  <ul>
+    <li *ngFor="let i of timers | keyvalue">
+      <figure>
+        <figcaption>{{i.key}}</figcaption>
+        <app-timer [time]="i.value"></app-timer>
+        <input type="time" name="t" id="some" [value]="i.value" (blur)="update_time($event, i.key)"
+          (keydown.enter)="update_time($event, i.key)" step="1">
+      </figure>
+    </li>
+  </ul>
+</main>
+<footer>
+  <form [formGroup]="checkoutForm" (ngSubmit)="create_timer()">
+    <input type="text" value="default" name="new-timer-name" id="timer-name" formControlName="name">
+    <input type="time" name="t" id="some" value="00:00:00" step="1" formControlName="time">
+    <!-- TODO: Fix default value for time -->
+    <button type="submit">Create timer</button>
+  </form>
+</footer>
