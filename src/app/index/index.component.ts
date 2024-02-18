@@ -3,6 +3,10 @@ import { Component } from '@angular/core';
 import { TimerComponent } from '../timer/timer.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+const DEFAULT = {
+  TIMER_NAME: "default",
+  TIMER_TIME: "00:00:00"
+}
 @Component({
   selector: 'app-index',
   standalone: true,
@@ -12,11 +16,11 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class IndexComponent {
   timers: { [key: string]: string }
-    = { 'default timer': '00:00:00' }
+    = { [DEFAULT.TIMER_NAME]: DEFAULT.TIMER_TIME }
   constructor(private formBuilder: FormBuilder) { }
   checkoutForm = this.formBuilder.group({
-    name: '',
-    time: ''
+    name: DEFAULT.TIMER_NAME,
+    time: DEFAULT.TIMER_TIME
   })
   update_time(event: Event, key: string) {
     this.timers[key] = (event.target as HTMLInputElement).value
