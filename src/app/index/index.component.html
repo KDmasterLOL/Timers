@@ -10,8 +10,12 @@
 </main>
 <footer>
   <form [formGroup]="checkoutForm" (ngSubmit)="create_timer()">
-    <input type="text" value="default" name="new-timer-name" id="timer-name" formControlName="name">
+    <input type="text" value="default" name="new-timer-name" list="suggestions" id="timer-name" formControlName="name"
+      autocomplete="off">
     <input type="time" name="t" id="some" value="00:00:00" step="1" formControlName="time">
-    <button type="submit">Create timer</button>
+    <datalist id="suggestions">
+      <option *ngFor="let i of timers | keyvalue" [value]="i.key"></option>
+    </datalist>
+    <button type="submit">{{has_timer() ? "Update" : "Create"}} timer</button>
   </form>
 </footer>

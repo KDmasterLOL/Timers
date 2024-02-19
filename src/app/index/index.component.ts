@@ -17,11 +17,14 @@ const DEFAULT = {
 export class IndexComponent {
   timers: { [key: string]: string }
     = { [DEFAULT.TIMER_NAME]: DEFAULT.TIMER_TIME }
+
   constructor(private formBuilder: FormBuilder) { }
   checkoutForm = this.formBuilder.group({
     name: DEFAULT.TIMER_NAME,
     time: DEFAULT.TIMER_TIME
   })
+  has_timer() { return Object.keys(this.timers).includes(this.checkoutForm.value.name || "") }
+  onchange(event: Event) { console.log("Change") }
   update_time(event: Event, key: string) {
     this.timers[key] = (event.target as HTMLInputElement).value
   }
