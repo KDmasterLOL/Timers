@@ -16,7 +16,7 @@ const DEFAULT = {
 })
 export class IndexComponent {
   timers: { [key: string]: string }
-    = { [DEFAULT.TIMER_NAME]: DEFAULT.TIMER_TIME }
+    = { [DEFAULT.TIMER_NAME]: DEFAULT.TIMER_TIME, "asdfasdfasdfadfsasdf": DEFAULT.TIMER_TIME, "asdfasdfasdfadfsasdfasdfadsf": DEFAULT.TIMER_TIME, "asdfasdfasdfadfsasdfasdfasdfasdfasd": DEFAULT.TIMER_TIME }
 
   constructor(private formBuilder: FormBuilder) { }
   checkoutForm = this.formBuilder.group({

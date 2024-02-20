@@ -2,6 +2,7 @@
   <ul>
     <li *ngFor="let i of timers | keyvalue">
       <figure>
+        <!-- TODO: Size of elemenets in figure align to size of timer -->
         <figcaption>{{i.key}}</figcaption>
         <app-timer [time]="i.value"></app-timer>
       </figure>
