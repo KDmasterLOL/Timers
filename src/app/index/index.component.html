@@ -1,6 +1,6 @@
 <main>
   <ul>
-    <li *ngFor="let i of timers | keyvalue">
+    <li *ngFor="let i of get_timers() | keyvalue">
       <figure>
         <!-- TODO: Size of elemenets in figure align to size of timer -->
         <figcaption>{{i.key}}</figcaption>
@@ -10,12 +10,12 @@
   </ul>
 </main>
 <footer>
-  <form [formGroup]="checkoutForm" (ngSubmit)="create_timer()">
+  <form [formGroup]="checkoutForm" (ngSubmit)="set_timer()">
     <input type="text" value="default" name="new-timer-name" list="suggestions" id="timer-name" formControlName="name"
       autocomplete="off">
     <input type="time" name="t" id="some" value="00:00:00" step="1" formControlName="time">
     <datalist id="suggestions">
-      <option *ngFor="let i of timers | keyvalue" [value]="i.key"></option>
+      <option *ngFor="let i of get_timers_name() | keyvalue" [value]="i.key"></option>
     </datalist>
     <button type="submit">{{has_timer() ? "Update" : "Create"}} timer</button>
   </form>
