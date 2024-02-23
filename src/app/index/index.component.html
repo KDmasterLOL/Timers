@@ -15,7 +15,7 @@
       autocomplete="off">
     <input type="time" name="t" id="some" value="00:00:00" step="1" formControlName="time">
     <datalist id="suggestions">
-      <option *ngFor="let i of get_timers_name() | keyvalue" [value]="i.key"></option>
+      <option *ngFor="let name of get_timers_name()" [value]="name"></option>
     </datalist>
     <button type="submit">{{has_timer() ? "Update" : "Create"}} timer</button>
   </form>
