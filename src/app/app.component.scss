@@ -1,0 +1,12 @@
+header {
+  nav {
+    display: flex;
+    list-style: none;
+    flex-flow: row nowrap;
+
+    li {
+      padding: 0.2rem;
+    }
+  }
+
+}
