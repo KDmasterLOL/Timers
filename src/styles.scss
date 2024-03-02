@@ -1,17 +1,24 @@
+$drab-dark-brown: hsla(42, 28%, 19%, 1);
+$russian-violet: hsla(253, 57%, 20%, 1);
+$battleship-gray: hsla(162, 9%, 55%, 1);
+$ut-orange: hsla(32, 100%, 50%, 1);
+$erin: hsla(115, 100%, 64%, 1);
+
 :root {
-  --main-back: black;
-  --second-back: black;
+  --back-main: hsl(0, 0%, 8%);
+  --back-second: hsl();
+  --back-theme-switcher: white;
+  --text-color: white;
+  --wheel-timer-color: white;
+}
+
+html {
+  background: var(--back-main);
+  color: var(--text-color);
 }
 
 body {
   padding: 0;
   margin: 0;
-}
-
-@mixin flex-center($direction: column) {
-  display: flex;
-  flex-direction: $direction;
-  align-items: center;
-  justify-content: center;
-  @content;
+  height: 100vh;
 }

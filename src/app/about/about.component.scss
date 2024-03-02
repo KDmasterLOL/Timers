@@ -1,0 +1,25 @@
+article {
+  $m: .8rem;
+
+  margin: {
+    left: $m;
+    right: $m;
+  }
+
+  hgroup {
+    padding-top: 0.05px;
+
+    margin: {
+      left: -$m;
+      right: -$m;
+    }
+
+    background: rgba(0, 0, 0, .3);
+
+    h1 {
+      font-size: 3rem;
+      text-align: center;
+    }
+  }
+
+}

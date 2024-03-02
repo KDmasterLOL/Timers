@@ -1,12 +1,3 @@
-header {
-  nav {
-    display: flex;
-    list-style: none;
-    flex-flow: row nowrap;
-
-    li {
-      padding: 0.2rem;
-    }
-  }
-
+main {
+  height: calc(100% - 3rem); // TODO: Replace 3rem with size of header
 }

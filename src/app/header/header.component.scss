@@ -1,0 +1,19 @@
+header {
+  width: 100%;
+  background-color: var(--back-second);
+
+  ul {
+    $m: 1rem;
+
+    margin: {
+      bottom: $m;
+      top: $m;
+    }
+
+    padding-left: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
