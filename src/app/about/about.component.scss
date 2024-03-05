@@ -1,5 +1,5 @@
 article {
-  $m: .8rem;
+  $m: 3rem;
 
   margin: {
     left: $m;
@@ -14,7 +14,7 @@ article {
       right: -$m;
     }
 
-    background: rgba(0, 0, 0, .3);
+    background: var(--back-second);
 
     h1 {
       font-size: 3rem;

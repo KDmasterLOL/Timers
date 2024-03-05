@@ -3,11 +3,11 @@
 
 $proportion: 6;
 
-// TODO: Correct styling to better fit dark theme
 main {
   height: 100% - calc(100/$proportion);
 
   ul {
+    margin: 0;
     padding-left: 0;
     display: flex;
     flex-wrap: wrap;

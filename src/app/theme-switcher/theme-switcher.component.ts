@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ThemeService } from '../theme.service';
 
 @Component({
   selector: 'app-theme-switcher',
@@ -8,6 +9,10 @@ import { Component } from '@angular/core';
   styleUrl: './theme-switcher.component.scss'
 })
 export class ThemeSwitcherComponent {
-  // TODO: Implement. Get implementation from /Users/ivantolmacev/Documents/20_ProgramingProjects/23_WEB/layouts/Technology/src/app/theme-switcher
 
+  constructor(private theme: ThemeService) {
+  }
+  switchTheme() {
+    this.theme.toggle()
+  }
 }
