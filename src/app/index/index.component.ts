@@ -15,6 +15,7 @@ export class IndexComponent {
   checkoutForm
 
   constructor(private formBuilder: FormBuilder, private timers: TimersService) {
+
     const { NAME: name, TIMEOUT: time } = this.timers.DEFAULT
     this.checkoutForm = this.formBuilder.group({ name, time })
   }
@@ -25,4 +26,7 @@ export class IndexComponent {
     this.timers.set_timer(name!, timeout!)
   }
   has_timer() { return this.timers.get_timer(this.checkoutForm.value.name!) != undefined }
+  rename_component() {
+    console.log('1221')
+  }
 }

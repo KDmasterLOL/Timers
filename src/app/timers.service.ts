@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class TimersService {
 
   DEFAULT = {
-    NAME: "default",
+    NAME: "default name of timer",
     TIMEOUT: "00:00:00"
   }
   private timers: { [key: string]: string } = { [this.DEFAULT.NAME]: this.DEFAULT.TIMEOUT }
