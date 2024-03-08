@@ -1,9 +1,9 @@
 <main>
   <ul>
-    <li *ngFor="let i of get_timers() | keyvalue">
+    <li *ngFor="let i of timers | keyvalue">
       <figure>
         <figcaption><span>{{i.key}}</span></figcaption>
-        <app-timer [time]="i.value"></app-timer>
+        <app-timer [time]="i.value.end - i.value.start"></app-timer>
       </figure>
     </li>
     <li>
@@ -23,7 +23,7 @@
       autocomplete="off">
     <input type="time" name="t" id="some" value="00:00:00" step="1" formControlName="time">
     <datalist id="suggestions">
-      <option *ngFor="let name of get_timers_name()" [value]="name"></option>
+      <option *ngFor="let entry of timers | keyvalue" [value]="entry.key"></option>
     </datalist>
     <button type="submit">{{has_timer() ? "Update" : "Create"}} timer</button>
   </form>
