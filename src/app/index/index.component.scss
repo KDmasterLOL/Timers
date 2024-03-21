@@ -37,22 +37,51 @@ main {
           transition: background-color ease-out 0.25s;
 
 
+          span {
+            position: relative;
+
+            button {
+              background: none;
+              border: none;
+              cursor: pointer;
+
+              visibility: hidden;
+
+              $size: 1rem;
+
+              // TODO: Make some transitions
+              img {
+                width: $size;
+                height: $size;
+              }
+
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              left: -1 * calc($size + 0.4rem);
+
+              filter: invert(1);
+            }
+
+          }
+
           &:hover {
             text-overflow: none;
             overflow: visible;
 
             span {
-              padding: 0.1rem;
+              button {
+                visibility: visible;
+              }
+
               display: inline-block;
               background-color: var(--back-second);
             }
-
-
           }
         }
       }
 
-      &:has(button) {
+      &:last-child {
         border: var(--back-second) 5px solid;
 
         &:hover {
@@ -81,6 +110,7 @@ main {
             }
           }
         }
+
       }
     }
 

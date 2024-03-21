@@ -1,37 +1,38 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange, SimpleChanges, afterNextRender, afterRender } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { ArcProgressComponent } from '../arc-progress/arc-progress.component';
-
-const SECONDS_IN_MIN = 60
-const MINS_IN_HOUR = 60
-
-function parse_time(time: string) { // Time in format "hh:mm:ss" to seconds
-  const multipliers = [MINS_IN_HOUR * SECONDS_IN_MIN, SECONDS_IN_MIN, 1]
-
-  return time.split(':')
-    .map(v => parseInt(v))
-    .map((v, i) => v * multipliers[i])
-    .reduce((x, y) => x + y, 0)
-}
+import { Timer } from '../timers.service';
 
 @Component({
   selector: 'app-timer',
   standalone: true,
   imports: [ArcProgressComponent],
-  templateUrl: './timer.component.html',
-  styleUrl: './timer.component.scss'
+  template: `
+  <app-arc-progress [progress]="current_progress" [content]="current_content" [size]="100">
+  </app-arc-progress>
+`,
 })
-export class TimerComponent implements OnChanges, OnDestroy, AfterViewInit {
-  @Input({ transform: parse_time }) time: number = 10
-  remain_seconds: number = 0
+export class TimerComponent implements OnChanges, AfterViewInit {
+  @Input({ required: true }) time!: Timer
   id_interval: NodeJS.Timeout | undefined
-  interval = 50
+  current_progress: number = 0
+  current_content: string = ''
 
-  public get progress(): number { return this.remain_seconds / this.time }
+  public get remain_time(): number { return Math.max(this.time.end - Date.now(), 0) }
+  public get wait_time(): number { return this.time.end - this.time.start }
+  public get_progress(): number { return this.remain_time / this.wait_time }
+  private parse_time(time: number): { hours: number, minutes: number, seconds: number } {
+    const MILISECS_IN_SEC = 1000
+    const SEC_IN_MIN = 60
+    const MINS_IN_HOUR = 60
+    return {
+      seconds: Math.floor(time / MILISECS_IN_SEC % SEC_IN_MIN),
+      minutes: Math.floor(time / MILISECS_IN_SEC / SEC_IN_MIN % MINS_IN_HOUR),
+      hours: Math.floor(time / MILISECS_IN_SEC / SEC_IN_MIN / MINS_IN_HOUR)
+    }
+  }
   public get content(): string {
-    const minutes = Math.floor(this.remain_seconds / SECONDS_IN_MIN)
-    const seconds = Math.floor(this.remain_seconds % SECONDS_IN_MIN)
-
-    return [minutes, seconds].map(
+    const { hours, minutes, seconds } = this.parse_time(this.remain_time)
+    return [hours, minutes, seconds].map(
       x => x.toLocaleString('en-US', {
         minimumIntegerDigits: 2,
         useGrouping: false
@@ -41,23 +42,15 @@ export class TimerComponent implements OnChanges, OnDestroy, AfterViewInit {
   ngAfterViewInit(): void { if (typeof window !== 'undefined') this.start() }
 
   start() {
+    const tick = () => {
+      this.current_progress = this.get_progress()
+      if (this.current_progress != 0) requestAnimationFrame(tick)
+    }
+    tick()
     console.log("Timer started")
-    if (this.id_interval == undefined)
-      this.id_interval = setInterval(() => {
-        this.remain_seconds -= this.interval / 1000
-        if (this.remain_seconds <= 0) this.stop()
-      }, this.interval)
   }
-  stop() {
-    if (this.remain_seconds < 0) this.remain_seconds = 0
-    if (this.id_interval) { clearInterval(this.id_interval); this.id_interval = undefined }
-  }
-
-  ngOnDestroy(): void { this.stop() }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.remain_seconds = this.time
-
     if (typeof window !== 'undefined') this.start()
   }
 }

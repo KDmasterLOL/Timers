@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-type Timer = { start: number, end: number }
+export type Timer = { start: number, end: number }
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class TimersService {
     const [hours, minutes, seconds] = time.split(":").map(v => parseInt(v))
     return new Date(0, 0, 0, hours, minutes, seconds, 0).getTime()
   }
-
+  // TODO: Add rename functionality
   add_timer(name: string, offset: number | string) {
     if (typeof (offset) == 'string') offset = this.parse_time(offset)
     this._timers[name] = { start: Date.now(), end: Date.now() + offset }
