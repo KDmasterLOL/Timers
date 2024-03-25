@@ -6,8 +6,9 @@
           <span>
             <button (click)="toggle_edit(i.key)"><img src="../../assets/Pen Icon.svg" alt=""></button>
             @if(i.key == current_edited){
-            <input type="text" (keydown.enter)="change_name(i.key, $event)" [value]="i.key"
-              [style.width]="i.key.length+'ch'">
+            <input type="text" #el (keydown.enter)="change_name(i.key, $event)" [value]="i.key"
+              [style.width]="i.key.length+'ch'" (input)="resize($event)">
+            <!-- TODO: make reactive changes of input -->
             }
             @else {
             {{i.key}}
@@ -18,7 +19,7 @@
       </figure>
     </li>
     <li>
-      <button id="add-timer">
+      <button id="add-timer" (click)="timers.add_timer('name', 0)">
         <svg viewBox="0 0 50 50">
           <path
             d="M25,2C12.317,2,2,12.317,2,25s10.317,23,23,23s23-10.317,23-23S37.683,2,25,2z M37,26H26v11h-2V26H13v-2h11V13h2v11h11V26z">
@@ -29,13 +30,13 @@
   </ul>
 </main>
 <footer>
-  <form [formGroup]="checkoutForm" (ngSubmit)="set_timer()">
-    <input type="text" value="default" name="new-timer-name" list="suggestions" id="timer-name" formControlName="name"
-      autocomplete="off">
-    <input type="time" name="t" id="some" value="00:00:00" step="1" formControlName="time">
-    <datalist id="suggestions">
-      <option *ngFor="let entry of timers | keyvalue" [value]="entry.key"></option>
-    </datalist>
-    <button type="submit">{{has_timer() ? "Update" : "Create"}} timer</button>
-  </form>
+  <!-- <form [formGroup]="checkoutForm" (ngSubmit)="set_timer()"> -->
+  <!--   <input type="text" value="default" name="new-timer-name" list="suggestions" id="timer-name" formControlName="name" -->
+  <!--     autocomplete="off"> -->
+  <!--   <input type="time" name="t" id="some" value="00:00:00" step="1" formControlName="time"> -->
+  <!--   <datalist id="suggestions"> -->
+  <!--     <option *ngFor="let entry of timers | keyvalue" [value]="entry.key"></option> -->
+  <!--   </datalist> -->
+  <!--   <button type="submit">{{has_timer() ? "Update" : "Create"}} timer</button> -->
+  <!-- </form> -->
 </footer>

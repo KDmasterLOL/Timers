@@ -40,6 +40,10 @@ main {
           span {
             position: relative;
 
+            input {
+              font-family: monospace;
+            }
+
             button {
               background: none;
               border: none;

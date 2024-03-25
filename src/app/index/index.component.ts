@@ -18,9 +18,12 @@ export class IndexComponent {
   constructor(private formBuilder: FormBuilder, protected timers: TimersService) {
     this.checkoutForm = this.formBuilder.group({ name: "", time: "00:00:00" })
   }
-  set_timer() {
-    const { name, time: timeout } = this.checkoutForm.value
-    this.timers.add_timer(name!, timeout!)
+  add_timer() {
+    this.timers.add_timer('name', 10000)
+  }
+  resize(event: Event) {
+    const input = event.target as HTMLInputElement
+    input.style.width = input.value.length + 'ch'
   }
   toggle_edit(index: string) {
     if (this.current_edited == index) this.current_edited = undefined
