@@ -18,9 +18,6 @@ export class IndexComponent {
   constructor(private formBuilder: FormBuilder, protected timers: TimersService) {
     this.checkoutForm = this.formBuilder.group({ name: "", time: "00:00:00" })
   }
-  add_timer() {
-    this.timers.add_timer('name', 10000)
-  }
   resize(event: Event) {
     const input = event.target as HTMLInputElement
     input.style.width = input.value.length + 'ch'

@@ -5,7 +5,7 @@ export class Timer {
   constructor(public start: number, public end: number) { }
   public get remain_time(): number { return Math.max(this.end - Date.now(), 0) }
   public get wait_time(): number { return this.end - this.start }
-  public get progress(): number { return this.remain_time / this.wait_time }
+  public get progress(): number { return this.wait_time == 0 ? 0 : this.remain_time / this.wait_time }
 }
 
 @Injectable({

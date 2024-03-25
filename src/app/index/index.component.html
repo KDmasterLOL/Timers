@@ -8,7 +8,6 @@
             @if(i.key == current_edited){
             <input type="text" #el (keydown.enter)="change_name(i.key, $event)" [value]="i.key"
               [style.width]="i.key.length+'ch'" (input)="resize($event)">
-            <!-- TODO: make reactive changes of input -->
             }
             @else {
             {{i.key}}
