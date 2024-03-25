@@ -15,13 +15,12 @@ export class IndexComponent {
   checkoutForm
   current_edited: string | undefined
 
-  constructor(private formBuilder: FormBuilder, private _timers: TimersService) {
+  constructor(private formBuilder: FormBuilder, protected timers: TimersService) {
     this.checkoutForm = this.formBuilder.group({ name: "", time: "00:00:00" })
   }
-  public get timers() { return this._timers.timers }
   set_timer() {
     const { name, time: timeout } = this.checkoutForm.value
-    this._timers.add_timer(name!, timeout!)
+    this.timers.add_timer(name!, timeout!)
   }
   toggle_edit(index: string) {
     if (this.current_edited == index) this.current_edited = undefined
@@ -32,10 +31,10 @@ export class IndexComponent {
     console.log(event)
     const target = event.target as HTMLInputElement
     if (target.value != key) {
-      // TODO: Implement renaming with service method
+      this.timers.rename_timer(key, target.value)
     }
   }
-  has_timer() { return this._timers.timers[this.checkoutForm.value.name!] != undefined }
+  has_timer() { return this.timers.timers[this.checkoutForm.value.name!] != undefined }
   rename_component() {
     console.log('1221')
   }

@@ -65,7 +65,8 @@ main {
 
           }
 
-          &:hover {
+          &:hover,
+          &.edited {
             text-overflow: none;
             overflow: visible;
 
