@@ -1,21 +1,7 @@
 <main>
   <ul>
     <li *ngFor="let i of timers.timers | keyvalue">
-      <figure>
-        <figcaption [class.edited]="i.key == current_edited">
-          <span>
-            <button (click)="toggle_edit(i.key)"><img src="../../assets/Pen Icon.svg" alt=""></button>
-            @if(i.key == current_edited){
-            <input type="text" #el (keydown.enter)="change_name(i.key, $event)" [value]="i.key"
-              [style.width]="i.key.length+'ch'" (input)="resize($event)">
-            }
-            @else {
-            {{i.key}}
-            }
-          </span>
-        </figcaption>
-        <app-timer [time]="i.value"></app-timer>
-      </figure>
+      <app-timer [name]="i.key"></app-timer>
     </li>
     <li>
       <button id="add-timer" (click)="timers.add_timer('name', 0)">

@@ -18,24 +18,5 @@ export class IndexComponent {
   constructor(private formBuilder: FormBuilder, protected timers: TimersService) {
     this.checkoutForm = this.formBuilder.group({ name: "", time: "00:00:00" })
   }
-  resize(event: Event) {
-    const input = event.target as HTMLInputElement
-    input.style.width = input.value.length + 'ch'
-  }
-  toggle_edit(index: string) {
-    if (this.current_edited == index) this.current_edited = undefined
-    else this.current_edited = index
-  }
-  change_name(key: string, event: Event) {
-    this.current_edited = undefined
-    console.log(event)
-    const target = event.target as HTMLInputElement
-    if (target.value != key) {
-      this.timers.rename_timer(key, target.value)
-    }
-  }
   has_timer() { return this.timers.timers[this.checkoutForm.value.name!] != undefined }
-  rename_component() {
-    console.log('1221')
-  }
 }
