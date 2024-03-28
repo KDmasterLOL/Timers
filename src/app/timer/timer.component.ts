@@ -2,19 +2,19 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, SimpleCh
 import { ArcProgressComponent } from '../arc-progress/arc-progress.component';
 import { Timer, TimersService } from '../timers.service';
 import { time_to_string } from '../time';
+import { AutosizeDirective } from '../autosize.directive';
 
 @Component({
   selector: 'app-timer',
   standalone: true,
-  imports: [ArcProgressComponent],
+  imports: [ArcProgressComponent, AutosizeDirective],
   template: `
       <figure>
         <figcaption [class.edited]="is_edit_name">
           <span>
             <button (click)="toggle_edit()"><img src="../../assets/Pen Icon.svg" alt=""></button>
             @if(is_edit_name){
-              <input type="text" #el (keydown.enter)="change_name($event)" [value]="name"
-                [style.width]="name.length+'ch'" (input)="resize($event)">
+              <input type="text" #el (keydown.enter)="change_name($event)" appAutosize [value]="name" >
             }
             @else {
               {{name}}
@@ -40,14 +40,11 @@ import { time_to_string } from '../time';
       @include flex-center();
 
       figcaption {
-        top: 0;
-        left: 0;
+        top: 0; left: 0;
         position: absolute;
         width: 100%;
         overflow: hidden;
-        text-wrap: nowrap;
-        text-overflow: ellipsis;
-        text-align: center;
+        text-wrap: nowrap; text-overflow: ellipsis; text-align: center;
         transition: background-color ease-out 0.25s;
 
 
