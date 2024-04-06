@@ -1,0 +1,78 @@
+@use "sass:math";
+@import '/mixins.scss';
+
+figure {
+  position: relative;
+  padding-top: 1.15rem;
+  margin: 0;
+  @include flex-center();
+
+  figcaption {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    transition: background-color ease-out 0.25s;
+
+
+    span {
+      position: relative;
+
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        visibility: hidden;
+
+        $size: 1rem;
+
+        // TODO: Make some transitions
+        img {
+          width: $size;
+          height: $size;
+        }
+
+        position: absolute;
+        top: 50%;
+        left: -1 * calc($size + 0.4rem);
+        transform: translateY(-50%);
+
+        filter: invert(1);
+      }
+    }
+
+    &:hover,
+    &.edited {
+      text-overflow: none;
+      overflow: visible;
+
+      span {
+        button {
+          visibility: visible;
+        }
+
+        display: inline-block;
+        background-color: var(--back-second);
+      }
+    }
+  }
+}
+
+app-arc-progress span {
+  text-wrap: nowrap;
+  font-size: 0;
+
+  span {
+    font-size: 1rem;
+  }
+
+  input[type=number] {
+    font-size: 0.9rem;
+    @extend %remove-arrows;
+    border: none;
+  }
+}

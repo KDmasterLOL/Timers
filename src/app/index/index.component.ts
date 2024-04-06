@@ -2,7 +2,7 @@ import { KeyValuePipe, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { TimerComponent } from '../timer/timer.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TimersService } from '../timers.service';
+import { Timer, TimersService } from '../services/timers.service';
 
 @Component({
   selector: 'app-index',
@@ -14,9 +14,10 @@ import { TimersService } from '../timers.service';
 export class IndexComponent {
   checkoutForm
   current_edited: string | undefined
+  add_timer() { this.timers_service.add_timer(Timer.default) }
 
-  constructor(private formBuilder: FormBuilder, protected timers: TimersService) {
+  constructor(private formBuilder: FormBuilder, protected timers_service: TimersService) {
     this.checkoutForm = this.formBuilder.group({ name: "", time: "00:00:00" })
   }
-  has_timer() { return this.timers.timers[this.checkoutForm.value.name!] != undefined }
+  // has_timer() { return this.timers.timers[this.checkoutForm.value.name!] != undefined }
 }

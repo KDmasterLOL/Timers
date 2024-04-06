@@ -1,10 +1,10 @@
 <main>
   <ul>
-    <li *ngFor="let i of timers.timers | keyvalue">
-      <app-timer [name]="i.key"></app-timer>
+    <li *ngFor="let timer of timers_service.timers">
+      <app-timer [timer]="timer"></app-timer>
     </li>
     <li>
-      <button id="add-timer" (click)="timers.add_timer('name', 0)">
+      <button id="add-timer" (click)="add_timer()">
         <svg viewBox="0 0 50 50">
           <path
             d="M25,2C12.317,2,2,12.317,2,25s10.317,23,23,23s23-10.317,23-23S37.683,2,25,2z M37,26H26v11h-2V26H13v-2h11V13h2v11h11V26z">
