@@ -11,7 +11,7 @@
   <app-arc-progress [progress]="current_progress" [size]="100">
     <span (dblclick)="toggle_edit(edit_states.Time)">
       @if(is_edit == edit_states.Time){
-      <input type="time" step="1" [value]="timer_timeout" />
+      <input type="time" step="1" [value]="timer_timeout" (keydown.enter)="change($event)" />
       }
       @else { <span>{{content}}</span> }
     </span>

@@ -34,6 +34,7 @@ figure {
         img {
           width: $size;
           height: $size;
+          filter: invert(calc(1 - var(--invert)));
         }
 
         position: absolute;

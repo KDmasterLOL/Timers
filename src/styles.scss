@@ -16,6 +16,7 @@ $sunglow: hsla(40, 100%, 67%, 1);
   --text-color: black;
   --contrast-color: black;
   --link-color: #{$russian-violet};
+  --invert: 0;
 
   &[theme=dark] {
     --back-main: hsl(0, 0%, 8%);
@@ -25,6 +26,7 @@ $sunglow: hsla(40, 100%, 67%, 1);
     --text-color: white;
     --contrast-color: white;
     --link-color: #{$erin};
+    --invert: 1;
   }
 }
 

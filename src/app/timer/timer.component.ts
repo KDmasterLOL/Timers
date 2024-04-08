@@ -1,7 +1,7 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { ArcProgressComponent } from '../arc-progress/arc-progress.component';
 import { Timer, TimersService } from '../services/timers.service';
-import { time_to_string } from '../time';
+import { parse_time, time_to_string } from '../time';
 import { AutosizeDirective } from '../autosize.directive';
 
 enum Edit {
@@ -16,7 +16,7 @@ enum Edit {
   templateUrl: './timer.component.html',
   styleUrl: './timer.component.scss'
 })
-export class TimerComponent implements OnChanges, AfterViewInit {
+export class TimerComponent implements OnChanges, AfterViewInit, OnDestroy {
   id_interval: NodeJS.Timeout | undefined
   current_progress: number = 0
   edit_states = Edit
@@ -24,6 +24,7 @@ export class TimerComponent implements OnChanges, AfterViewInit {
   @Input({ required: true }) timer!: Timer
 
   constructor(private cd: ChangeDetectorRef) { }
+  ngOnDestroy(): void { if (this.id_interval) clearInterval(this.id_interval) }
   ngAfterViewInit(): void { if (typeof window !== 'undefined') this.start() }
 
   content: string = ''
@@ -42,13 +43,13 @@ export class TimerComponent implements OnChanges, AfterViewInit {
     console.log("Timer started")
   }
 
+
   toggle_edit(edit: Edit) { this.is_edit = this.is_edit == edit ? Edit.None : edit }
   change(event: Event) {
     const target = event.target as HTMLInputElement
     switch (this.is_edit) {
       case Edit.Name: this.timer.name = target.value; break
-      case Edit.Time:
-        break
+      case Edit.Time: this.timer.timeout = parse_time(target.value); break
       default:
         break
     }
