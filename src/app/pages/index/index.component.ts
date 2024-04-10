@@ -1,8 +1,8 @@
 import { KeyValuePipe, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { TimerComponent } from '../timer/timer.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Timer, TimersService } from '../services/timers.service';
+import { Timer, TimersService } from '../../services/timers.service';
+import { TimerComponent } from '@components/timer/timer.component';
 
 @Component({
   selector: 'app-index',

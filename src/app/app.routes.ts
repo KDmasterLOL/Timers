@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { IndexComponent } from './index/index.component';
-import { AboutComponent } from './about/about.component';
+import { AboutComponent } from 'pages/about/about.component';
+import { IndexComponent } from 'pages/index/index.component';
 
 export const routes: Routes = [
   { path: '', component: IndexComponent },

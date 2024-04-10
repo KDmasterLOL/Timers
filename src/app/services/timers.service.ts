@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { parse_time } from '../time';
+import { parse_time } from '../lib/time';
 
 export class Timer {
   start: number = 0

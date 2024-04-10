@@ -1,8 +1,8 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
-import { ArcProgressComponent } from '../arc-progress/arc-progress.component';
-import { Timer, TimersService } from '../services/timers.service';
-import { parse_time, time_to_string } from '../time';
-import { AutosizeDirective } from '../autosize.directive';
+import { ArcProgressComponent } from '@components/arc-progress/arc-progress.component';
+import { Timer, TimersService } from '@services/timers.service';
+import { AutosizeDirective } from '@directives/autosize.directive';
+import { parse_time, time_to_string } from '@lib/time';
 
 enum Edit {
   None,
