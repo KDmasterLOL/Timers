@@ -44,6 +44,12 @@ body {
 button {
   background-color: var(--back-contrast);
   color: var(--text-color);
+
+  &.clear {
+    padding: 0;
+    background: none;
+    border: none;
+  }
 }
 
 input {

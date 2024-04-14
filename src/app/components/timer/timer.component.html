@@ -3,20 +3,20 @@
     <span>
       <button (click)="toggle_edit(edit_states.Name)"><img src="../../assets/Pen Icon.svg" alt=""></button>
       @if(is_edit == edit_states.Name){
-      <input type="text" (keydown.enter)="change($event)" appAutosize [value]="timer.name">
+      <input type="text" (keydown.enter)="change($event)" appAutosize [value]="timer.name" appAutofocus>
       }
       @else { {{timer.name}} }
     </span>
   </figcaption>
   <app-arc-progress [progress]="current_progress" [size]="100">
-    <span (dblclick)="toggle_edit(edit_states.Time)">
-      @if(is_edit == edit_states.Time){
-      <input type="time" step="1" [value]="timer_timeout" (keydown.enter)="change($event)" />
-      }
-      @else { <span>{{content}}</span> }
-    </span>
-    <span>
-    </span>
-    <span></span>
+    <article>
+      <section (dblclick)="toggle_edit(edit_states.Time)" (keydown.esc)="toggle_edit(edit_states.Time)">
+        @if(is_edit == edit_states.Time){
+        <input type="time" step="1" [value]="timer_timeout" (keydown.enter)="change($event)" appAutofocus />
+        }
+        @else { <span>{{content}}</span>}
+      </section>
+      <button class="clear" id="timer_state" (click)="switch_timer_state()">{{ toggle_symbol }}</button>
+    </article>
   </app-arc-progress>
 </figure>

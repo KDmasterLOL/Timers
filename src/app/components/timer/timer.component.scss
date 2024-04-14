@@ -63,17 +63,30 @@ figure {
   }
 }
 
-app-arc-progress span {
+app-arc-progress {
   text-wrap: nowrap;
-  font-size: 0;
 
-  span {
-    font-size: 1rem;
-  }
+  article {
 
-  input[type=number] {
-    font-size: 0.9rem;
-    @extend %remove-arrows;
-    border: none;
+    position: relative;
+
+    input[type=time] {
+      font-size: 0.9rem;
+      padding: 5px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+
+      &::-webkit-calendar-picker-indicator {
+        display: none;
+      }
+    }
+
+    button#timer_state {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      translate: -50% 100%;
+    }
   }
 }
