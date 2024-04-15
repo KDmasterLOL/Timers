@@ -1,8 +1,8 @@
 <figure>
-  <figcaption [class.edited]="is_edit == edit_states.Name">
+  <figcaption [class.edited]="current_edited == 'name'">
     <span>
-      <button (click)="toggle_edit(edit_states.Name)"><img src="../../assets/Pen Icon.svg" alt=""></button>
-      @if(is_edit == edit_states.Name){
+      <button (click)="toggle_edit('name')"><img src="../../assets/Pen Icon.svg" alt=""></button>
+      @if(current_edited == 'name'){
       <input type="text" (keydown.enter)="change($event)" appAutosize [value]="timer.name" appAutofocus>
       }
       @else { {{timer.name}} }
@@ -10,8 +10,8 @@
   </figcaption>
   <app-arc-progress [progress]="current_progress" [size]="100">
     <article>
-      <section (dblclick)="toggle_edit(edit_states.Time)" (keydown.esc)="toggle_edit(edit_states.Time)">
-        @if(is_edit == edit_states.Time){
+      <section (dblclick)="toggle_edit('time')" (keydown.esc)="toggle_edit('time')">
+        @if(current_edited == 'time'){
         <input type="time" step="1" [value]="timer_timeout" (keydown.enter)="change($event)" appAutofocus />
         }
         @else { <span>{{content}}</span>}

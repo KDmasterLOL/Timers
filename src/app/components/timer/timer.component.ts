@@ -5,11 +5,7 @@ import { AutofocusDirective } from '@directives/autofocus.directive';
 import { parse_time, time_to_string } from '@lib/time';
 import { Timer } from '@lib/timer';
 
-enum Edit {
-  None,
-  Name,
-  Time
-}
+type edit_state = 'name' | 'time' | undefined
 @Component({
   selector: 'app-timer',
   standalone: true,
@@ -20,8 +16,7 @@ enum Edit {
 export class TimerComponent implements OnChanges, AfterViewInit, OnDestroy {
   id_interval: NodeJS.Timeout | undefined
   current_progress: number = 0
-  edit_states = Edit
-  is_edit: Edit = Edit.None
+  current_edited: edit_state = undefined
   running: boolean = false
   @Input({ required: true }) timer!: Timer
 
@@ -47,15 +42,15 @@ export class TimerComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
 
-  toggle_edit(edit: Edit) { this.is_edit = this.is_edit == edit ? Edit.None : edit }
+  toggle_edit(edit: edit_state) { this.current_edited = this.current_edited == edit ? undefined : edit }
   change(event: Event) {
     const target = event.target as HTMLInputElement
-    switch (this.is_edit) {
-      case Edit.Name: this.timer.name = target.value; break
-      case Edit.Time: this.timer.timeout = parse_time(target.value); this.start(); break
+    switch (this.current_edited) {
+      case 'name': this.timer.name = target.value; break
+      case 'time': this.timer.timeout = parse_time(target.value); this.start(); break
       default: break
     }
-    this.is_edit = Edit.None
+    this.current_edited = undefined
   }
   switch_timer_state() {
     if (this.timer.expired) { this.timer.restart(); this.start(); console.log(this.timer.timeout) }
