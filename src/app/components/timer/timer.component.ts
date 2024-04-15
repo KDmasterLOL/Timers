@@ -1,6 +1,5 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { ArcProgressComponent } from '@components/arc-progress/arc-progress.component';
-import { TimersService } from '@services/timers.service';
 import { AutosizeDirective } from '@directives/autosize.directive';
 import { AutofocusDirective } from '@directives/autofocus.directive';
 import { parse_time, time_to_string } from '@lib/time';

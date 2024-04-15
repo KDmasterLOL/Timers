@@ -1,8 +1,10 @@
 <main>
   <ul>
-    <li *ngFor="let timer of timers_service.timers">
+    @for(timer of timers_service.timers; track timer){
+    <li>
       <app-timer [timer]="timer"></app-timer>
     </li>
+    }
     <li>
       <button id="add-timer" (click)="add_timer()">
         <svg viewBox="0 0 50 50">
