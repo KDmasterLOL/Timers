@@ -2,32 +2,32 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, OnDestro
 import { ArcProgressComponent } from '@components/arc-progress/arc-progress.component';
 import { AutosizeDirective } from '@directives/autosize.directive';
 import { AutofocusDirective } from '@directives/autofocus.directive';
-import { parse_time, time_to_string } from '@lib/time';
 import { Timer } from '@lib/timer';
+import { TimeComponent } from '@components/time/time.component';
 
 type edit_state = 'name' | 'time' | undefined
 @Component({
   selector: 'app-timer',
   standalone: true,
-  imports: [ArcProgressComponent, AutosizeDirective, AutofocusDirective],
+  imports: [ArcProgressComponent, AutosizeDirective, AutofocusDirective, TimeComponent],
   templateUrl: './timer.component.html',
   styleUrl: './timer.component.scss'
 })
 export class TimerComponent implements OnChanges, AfterViewInit, OnDestroy {
-  id_interval: NodeJS.Timeout | undefined
+  id_interval: ReturnType<typeof setInterval> | undefined
   current_progress: number = 0
   current_edited: edit_state = undefined
   running: boolean = false
+  content: number = 0
   @Input({ required: true }) timer!: Timer
 
   constructor(private cd: ChangeDetectorRef) { }
   ngOnDestroy(): void { if (this.id_interval) clearInterval(this.id_interval) }
   ngAfterViewInit(): void { if (typeof window !== 'undefined') this.start() }
 
-  content: string = ''
   public get timer_timeout(): string { return time_to_string(this.timer.timeout) }
 
-  update_remain_time() { this.content = time_to_string(this.timer.remain_time) }
+  update_remain_time() { this.content = this.timer.remain_time }
   start() {
     this.update_remain_time(); if (!this.id_interval) this.id_interval = setInterval(() => this.update_remain_time(), 1000)
 

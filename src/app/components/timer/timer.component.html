@@ -14,7 +14,7 @@
         @if(current_edited == 'time'){
         <input type="time" step="1" [value]="timer_timeout" (keydown.enter)="change($event)" appAutofocus />
         }
-        @else { <span>{{content}}</span>}
+        @else { <app-time [time]="content"></app-time> }
       </section>
       <button class="clear" id="timer_state" (click)="switch_timer_state()">{{ toggle_symbol }}</button>
     </article>

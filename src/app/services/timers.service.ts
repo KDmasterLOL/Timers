@@ -5,7 +5,6 @@ import { Timer } from '@lib/timer';
 
 @Injectable({ providedIn: 'root' })
 export class TimersService {
-
   private _timers: Timer[] = []
   public get timers() { return this._timers }
 
