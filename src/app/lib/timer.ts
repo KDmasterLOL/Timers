@@ -1,4 +1,3 @@
-import { Time } from "./time"
 
 export class Timer {
   start: number = 0
@@ -9,7 +8,7 @@ export class Timer {
   pause_offset = 0
 
 
-  constructor(name: string, timeout: Time) {
+  constructor(name: string, timeout: number) {
     this.timeout = timeout; this.name = name
   }
   public get current_time(): number { return (this.state == 'running' ? Date.now() : this.paused_at) - this.pause_offset }

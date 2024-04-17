@@ -2,6 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, OnDestro
 import { ArcProgressComponent } from '@components/arc-progress/arc-progress.component';
 import { AutosizeDirective } from '@directives/autosize.directive';
 import { AutofocusDirective } from '@directives/autofocus.directive';
+import { parse_time, time_to_string } from '@lib/time';
 import { Timer } from '@lib/timer';
 import { TimeComponent } from '@components/time/time.component';
 
