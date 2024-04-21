@@ -1,0 +1,15 @@
+<div>
+  <main>
+    @switch(type) {
+    @case('timer') {
+    <app-timer [timer]="$any(obj)"></app-timer>
+    }
+    @case('stopwatch') {
+    <app-stopwatch [stopwatch]="$any(obj)"></app-stopwatch>
+    }
+    }
+  </main>
+  <footer>
+    <button class="clear" (click)="switch()">Convert to {{type == 'timer' ? "Timer" : "Stopwatch"}}</button>
+  </footer>
+</div>

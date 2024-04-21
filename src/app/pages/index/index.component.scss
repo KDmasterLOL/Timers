@@ -15,6 +15,7 @@ main {
     display: flex;
     gap: 2rem;
     flex-wrap: wrap;
+    align-items: center;
 
     li {
       list-style-type: none;
@@ -63,7 +64,6 @@ footer {
   @include flex-center();
 
   form {
-
     width: fit-content;
 
     @include flex-center(row) {

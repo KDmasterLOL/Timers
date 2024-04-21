@@ -1,0 +1,30 @@
+:host>div {
+  transition: outline 150ms ease-in 250ms;
+  outline: black 1px solid;
+  border-radius: 12.5%;
+
+  &:hover {
+    transition: outline 300ms ease-in 250ms;
+    outline: white 2px solid;
+
+    footer {
+      opacity: 1;
+      transition: opacity 250ms ease-in-out 750ms;
+    }
+  }
+
+  position: relative;
+
+  footer {
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    translate: -50% 100%;
+    opacity: 0;
+    transition: opacity 250ms ease-in-out 300ms;
+    background-color: var(--back-main);
+
+    button {}
+
+  }
+}

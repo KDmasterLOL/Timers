@@ -1,12 +1,7 @@
-export class Stopwatch {
-  start: number
-  constructor() {
-    this.start = Date.now()
-  }
-  public get time(): number {
-    return Date.now() - this.start
-  }
-  public static get default(): Stopwatch {
-    return new Stopwatch()
-  }
+import { Clock } from "./clock"
+
+export class Stopwatch extends Clock {
+  override restart(): void { this.start = Date.now() }
+  public override get current_time(): number { return Date.now() - this.start }
+  public static get default(): Stopwatch { return new Stopwatch('default') }
 }
