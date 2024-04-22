@@ -4,7 +4,7 @@ export class Timer extends Clock {
   end: number = 0
 
   constructor(name: string, timeout: number) {
-    super(name)
+    super(name, 'timer')
     this.timeout = timeout
   }
   public override get current_time(): number { return (this.state == 'running' ? Date.now() : this.paused_at) - this.pause_offset }

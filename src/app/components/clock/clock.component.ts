@@ -13,19 +13,13 @@ import { ClockService, clock } from '@services/timers.service';
   styleUrl: './clock.component.scss'
 })
 export class ClockComponent {
-  #clock!: clock
-  @Input({ required: true }) set obj(v: clock) {
-    this.#clock = v
-    this.type = v instanceof Timer ? 'timer' : 'stopwatch'
-  }
-  public get obj(): clock { return this.#clock }
-  type!: 'stopwatch' | 'timer'
+  @Input({ required: true }) obj!: clock
   constructor(private clock_service: ClockService) { }
   switch() {
-    switch (this.type) {
-      case 'timer': this.clock_service.change(this.#clock, Stopwatch.default)
+    switch (this.obj.type) {
+      case 'timer': this.clock_service.change(this.obj, Stopwatch.default)
         break;
-      case 'stopwatch': this.clock_service.change(this.#clock, Timer.default)
+      case 'stopwatch': this.clock_service.change(this.obj, Timer.default)
         break
       default:
         break;
