@@ -15,6 +15,7 @@ import { ClockService, clock } from '@services/timers.service';
 export class ClockComponent {
   @Input({ required: true }) obj!: clock
   constructor(private clock_service: ClockService) { }
+  remove() { this.clock_service.remove(this.obj) }
   switch() {
     switch (this.obj.type) {
       case 'timer': this.clock_service.change(this.obj, Stopwatch.default)

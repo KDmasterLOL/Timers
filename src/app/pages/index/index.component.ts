@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ClockComponent } from '@components/clock/clock.component';
-import { Stopwatch } from '@lib/stopwatch';
 import { Timer } from '@lib/timer';
 import { ClockService, clock } from '@services/timers.service';
 
@@ -15,6 +14,7 @@ import { ClockService, clock } from '@services/timers.service';
 export class IndexComponent {
   current_edited: string | undefined
   add() { this.clock_service.add(Timer.default) }
+  remove(clock: clock) { this.clock_service.remove(clock) }
   constructor(protected clock_service: ClockService) { }
   get_type(v: clock) { return v instanceof Timer ? 'timer' : 'stopwatch' }
 }

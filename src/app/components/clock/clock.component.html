@@ -10,6 +10,7 @@
     }
   </main>
   <footer>
+    <button (click)="remove()">Remove</button>
     <button class="clear" (click)="switch()">Convert to {{obj.type == 'timer' ? "Timer" : "Stopwatch"}}</button>
   </footer>
 </div>

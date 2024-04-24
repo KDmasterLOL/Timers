@@ -9,6 +9,7 @@ export class ClockService {
   private _clocks: clock[] = []
   public get clocks() { return this._clocks }
   add(value: clock) { this.clocks.push(value); this.save() }
+  remove(value: clock) { this._clocks.splice(this._clocks.indexOf(value), 1) }
   get(id: number): clock | undefined { return this._clocks.find((v: clock) => v.id == id) }
   change(old: clock, next: clock) { this._clocks[this._clocks.indexOf(old)] = next; this.save() }
   private save() { localStorage.setItem('clocks', JSON.stringify(this._clocks)) }
