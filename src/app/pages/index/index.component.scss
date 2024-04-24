@@ -12,7 +12,8 @@ main {
   ul {
     margin: 0;
     padding-left: 0;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 1fr);
     gap: 2rem;
     flex-wrap: wrap;
     align-items: center;

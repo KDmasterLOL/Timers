@@ -17,6 +17,7 @@ $sunglow: hsla(40, 100%, 67%, 1);
   --contrast-color: black;
   --link-color: #{$russian-violet};
   --invert: 0;
+  --warning: red;
 
   &[theme=dark] {
     --back-main: hsl(0, 0%, 8%);
@@ -45,10 +46,25 @@ button {
   background-color: var(--back-contrast);
   color: var(--text-color);
 
+  &.clear,
+  &.warning {
+    border: none;
+  }
+
   &.clear {
     padding: 0;
     background: none;
+  }
+
+  &.warning {
+    background-color: var(--warning);
+    border-radius: 1em;
     border: none;
+    transition: background-color 300ms ease-in;
+
+    &:active {
+      background-color: color-mix(in srgb, var(--warning) 60%, white 40%);
+    }
   }
 }
 
