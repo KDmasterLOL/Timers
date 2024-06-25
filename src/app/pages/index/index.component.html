@@ -1,18 +1,14 @@
-<main>
-  <ul>
+<article class="px-10">
+  <ul class="w-full mt-10 grid grid-cols-4 gap-10 gap-y-20 justify-center items-center list-none">
     @for(clock of clock_service.clocks; track clock){
-    <li>
+    <li class="bg-base-100">
       <app-clock [obj]="clock"></app-clock>
     </li>
     }
-    <li>
-      <button id="add-timer" (click)="add()">
-        <svg viewBox="0 0 50 50">
-          <path
-            d="M25,2C12.317,2,2,12.317,2,25s10.317,23,23,23s23-10.317,23-23S37.683,2,25,2z M37,26H26v11h-2V26H13v-2h11V13h2v11h11V26z">
-          </path>
-        </svg>
+    <li class="flex justify-center items-center">
+      <button class="btn" (click)="add()">
+        <span class="material-icons block text-2xl">add</span>
       </button>
     </li>
   </ul>
-</main>
+</article>

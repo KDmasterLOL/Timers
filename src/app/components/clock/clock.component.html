@@ -1,5 +1,5 @@
-<div>
-  <main>
+<div class="hover:outline rounded-xl">
+  <main class="flex justify-center items-center">
     @switch(obj.type) {
     @case('timer') {
     <app-timer [timer]="$any(obj)"></app-timer>
@@ -9,8 +9,9 @@
     }
     }
   </main>
-  <footer>
-    <button (click)="remove()" class="warning">Remove</button>
-    <button class="clear" (click)="switch()">Convert to {{obj.type == 'timer' ? "Timer" : "Stopwatch"}}</button>
+  <footer class="z-50 absolute flex gap-4 left-[50%] w-max -bottom-2 -translate-x-[50%] translate-y-[100%]">
+    <button (click)="remove()" class="btn btn-error text-xs p-1">Remove</button>
+    <button class="btn btn-warning p-1 text-xs" (click)="switch()">Convert to<br>{{obj.type == 'timer' ? "Timer" :
+      "Stopwatch"}}</button>
   </footer>
 </div>

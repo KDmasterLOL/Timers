@@ -1,3 +1,16 @@
+@use "@angular/material" as mat;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$my-custom-typography-config: mat.define-typography-config($body-2: mat.define-typography-level(1rem, 1.25rem, 400),
+    $body-1: mat.define-typography-level(1rem, 1.25rem, 400),
+  );
+
+@include mat.typography-hierarchy($my-custom-typography-config);
+
+
 $drab-dark-brown: hsla(42, 28%, 19%, 1);
 $russian-violet: hsla(253, 57%, 20%, 1);
 $battleship-gray: hsla(162, 9%, 55%, 1);
@@ -32,19 +45,10 @@ $sunglow: hsla(40, 100%, 67%, 1);
 }
 
 html {
-  background: var(--back-main);
-  color: var(--text-color);
-}
-
-body {
-  padding: 0;
-  margin: 0;
-  height: 100vh;
+  font-size: 24px;
 }
 
 button {
-  background-color: var(--back-contrast);
-  color: var(--text-color);
 
   &.clear,
   &.warning {
@@ -81,8 +85,4 @@ input {
   &[appautosize] {
     font-family: monospace;
   }
-}
-
-a {
-  color: var(--link-color);
 }

@@ -1,44 +1,31 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Inject, Injectable, OnInit, PLATFORM_ID, afterNextRender } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
-enum Themes {
-  light,
-  dark
-}
-@Injectable({
-  providedIn: 'root'
-})
+const themes = ['light', 'dark'] as const
+export type Theme = typeof themes[number];
+const THEME = 'theme'
+@Injectable({ providedIn: 'root' })
 export class ThemeService {
-  __theme = Themes.light
-  THEME = 'theme'
+  __theme: BehaviorSubject<Theme> = new BehaviorSubject('light' as Theme)
 
-  public get theme(): Themes { return this.__theme }
-  public set theme(next_theme: Themes) {
-    this.__theme = next_theme;
-
-    document.documentElement.setAttribute(this.THEME, Themes[next_theme])
-    localStorage.setItem(this.THEME, Themes[next_theme])
-
-    console.log(`Set theme to ${Themes[next_theme]} by index ${next_theme}`);
+  public get theme(): Observable<Theme> { return this.__theme.asObservable() }
+  public set theme(next_theme: Theme) {
+    this.__theme.next(next_theme);
+    console.log('New theme ', next_theme)
+    document.documentElement.dataset[THEME] = next_theme
+    localStorage.setItem(THEME, next_theme)
   }
 
   restorePrevTheme() {
-    const theme = 'theme'
-    const last_theme = localStorage.getItem(theme)
-    console.log(`Last theme is ${last_theme}`)
-    if (last_theme != null) this.theme = Themes[last_theme as keyof typeof Themes] || Themes.light;
-    else this.theme = Themes.light
+    const last_theme = localStorage.getItem(THEME)
+    if (last_theme !== null) this.theme = last_theme as Theme
+    else this.theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   }
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    if (isPlatformBrowser(this.platformId)) {
-      this.restorePrevTheme()
-    }
+    if (isPlatformBrowser(this.platformId)) this.restorePrevTheme()
   }
-  toggle() {
-    const next_theme: Themes = (this.theme + 1) % (Object.values(Themes).length / 2)
-    console.log("Theme switched")
-    this.theme = next_theme
-  }
+  toggle() { this.theme = this.__theme.getValue() == 'light' ? 'dark' : 'light' }
 }
 

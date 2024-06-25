@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ThemeSwitcherComponent } from '@components/theme-switcher/theme-switcher.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, ThemeSwitcherComponent],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
-
-}
+export class HeaderComponent { }

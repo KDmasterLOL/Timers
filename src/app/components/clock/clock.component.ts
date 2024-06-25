@@ -22,8 +22,6 @@ export class ClockComponent {
         break;
       case 'stopwatch': this.clock_service.change(this.obj, Timer.default)
         break
-      default:
-        break;
     }
 
   }

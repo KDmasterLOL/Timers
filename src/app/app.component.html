@@ -1,5 +1,6 @@
-<app-header></app-header>
-<main>
-  <router-outlet></router-outlet>
-</main>
-<app-theme-switcher></app-theme-switcher>
+<div class="grid grid-rows-12 h-[100vh]">
+  <app-header class="row-span-1"></app-header>
+  <main class="row-span-11 overflow-y-scroll">
+    <router-outlet></router-outlet>
+  </main>
+</div>

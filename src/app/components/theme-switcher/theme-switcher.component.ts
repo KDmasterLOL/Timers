@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ThemeService } from '@services/theme.service';
+import { ThemeService, type Theme } from '@services/theme.service';
+import { MatIconModule } from '@angular/material/icon';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-theme-switcher',
   standalone: true,
-  imports: [],
+  imports: [MatIconModule, AsyncPipe],
   templateUrl: './theme-switcher.component.html',
-  styleUrl: './theme-switcher.component.scss'
 })
 export class ThemeSwitcherComponent {
-
-  constructor(private theme: ThemeService) {
-  }
-  switchTheme() {
-    this.theme.toggle()
-  }
+  current_theme!: Observable<Theme>
+  constructor(private theme: ThemeService) { this.current_theme = theme.theme }
+  switchTheme() { this.theme.toggle() }
 }
