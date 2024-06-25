@@ -21,29 +21,6 @@ figure {
 
     span {
       position: relative;
-
-      button {
-        background: none;
-        border: none;
-        cursor: pointer;
-        visibility: hidden;
-
-        $size: 1rem;
-
-        // TODO: Make some transitions
-        img {
-          width: $size;
-          height: $size;
-          filter: invert(calc(1 - var(--invert)));
-        }
-
-        position: absolute;
-        top: 50%;
-        left: -1 * calc($size + 0.4rem);
-        transform: translateY(-50%);
-
-        filter: invert(1);
-      }
     }
 
     &:hover,
@@ -53,11 +30,10 @@ figure {
 
       span {
         button {
-          visibility: visible;
+          opacity: 1;
         }
 
         display: inline-block;
-        background-color: var(--back-second);
       }
     }
   }

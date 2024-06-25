@@ -1,7 +1,8 @@
 <figure>
   <figcaption [class.edited]="current_edited == 'name'">
     <span>
-      <button (click)="toggle_edit('name')"><img src="../../assets/Pen Icon.svg" alt=""></button>
+      <button class="absolute top-[50%] left-0 -translate-x-full -translate-y-[50%] pr-1 opacity-0 transition-opacity"
+        (click)="toggle_edit('name')"><span class="material-icons">edit</span></button>
       @if(current_edited == 'name'){
       <input type="text" (keydown.enter)="change($event)" appAutosize [value]="timer.name" appAutofocus>
       }
