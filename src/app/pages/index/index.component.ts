@@ -1,3 +1,4 @@
+import { trigger, transition, style, animate } from '@angular/animations';
 import { Component } from '@angular/core';
 import { ClockComponent } from '@components/clock/clock.component';
 import { Timer } from '@lib/timer';
@@ -8,6 +9,19 @@ import { ClockService, clock } from '@services/timers.service';
   selector: 'app-index',
   standalone: true,
   imports: [ClockComponent],
+  animations: [
+    trigger('animation',
+      [
+        transition(':enter', [
+          style({ opacity: 0 }),
+          animate('500ms', style({ opacity: 1 }))
+        ]),
+        transition(':leave', [
+          animate(300, style({ transform: 'translateX(-100%)', opacity: 0 }))
+        ])
+      ]
+    )
+  ],
   templateUrl: './index.component.html',
   styleUrl: './index.component.scss'
 })

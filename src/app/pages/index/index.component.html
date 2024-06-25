@@ -1,7 +1,7 @@
 <article class="px-10">
   <ul class="w-full mt-10 grid grid-cols-4 gap-10 gap-y-20 justify-center items-center list-none">
-    @for(clock of clock_service.clocks; track clock){
-    <li class="bg-base-100">
+    @for(clock of clock_service.clocks; track clock.id){
+    <li @animation class="bg-base-100">
       <app-clock [obj]="clock"></app-clock>
     </li>
     }
